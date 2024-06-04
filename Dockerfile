@@ -11,7 +11,7 @@ COPY . .
 #Compilar el proyecto
 RUN npm run build
 #Usar una imagen de nginx para servir el contenido estatico
-FROM nginx:1.19.0-alpine AS prod-stage
+FROM nginx:1.19.0-alpine
 #Copiar los archivos de construccion desde la etapa anterior
 COPY --from=build /app/dist/ /usr/share/nginx/html
 #Exponer el puerto que se usará para acceder a la aplicacion
