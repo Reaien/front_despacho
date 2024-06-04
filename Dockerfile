@@ -11,9 +11,9 @@ COPY . .
 #Compilar el proyecto
 RUN npm run build
 #Usar una imagen de nginx para servir el contenido estatico
-FROM nginx:alpine
+FROM nginx:1.27.0-alpine
 #Copiar los archivos de construccion desde la etapa anterior
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist/ /usr/share/nginx/html
 #Copiar el archivo de configuracion de nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 #Exponer el puerto que se usará para acceder a la aplicacion
