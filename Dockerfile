@@ -11,11 +11,9 @@ COPY . .
 #Compilar el proyecto
 RUN npm run build
 #Usar una imagen de nginx para servir el contenido estatico
-FROM nginx:1.27.0-alpine
+FROM nginx:1.19.0-alpine AS prod-stage
 #Copiar los archivos de construccion desde la etapa anterior
 COPY --from=build /app/dist/ /usr/share/nginx/html
-#Copiar el archivo de configuracion de nginx
-COPY nginx.conf /etc/nginx/nginx.conf
 #Exponer el puerto que se usará para acceder a la aplicacion
 EXPOSE 80
 #Comando para iniciar nginx
