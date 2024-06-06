@@ -18,7 +18,16 @@ export const FormDespacho = ({ venta, onClose }) => {
       valor_compra: venta.valor_compra,
     };
 
+    const jsonDataSales = {
+      despacho_generado: true,
+    };
+
     console.log("Datos del formulario:", jsonData);
+
+    await axios.put(
+      `https://my-json-server.typicode.com/tih4r3-chan/Despacho/Ventas/${venta.id}`,
+      jsonDataSales
+    );
 
     try {
       await axios.post("http://44.205.221.190:8000/despachos/", jsonData, {
@@ -32,10 +41,10 @@ export const FormDespacho = ({ venta, onClose }) => {
         icon: "success",
         confirmButtonText: "Aceptar",
       });
-      onClose();
     } catch (error) {
       console.error("Error en la solicitud:", error);
     }
+    onClose();
   };
   return (
     <>
