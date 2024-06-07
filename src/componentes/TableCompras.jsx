@@ -44,28 +44,30 @@ export const TableCompras = () => {
                 </tr>
               </thead>
               <tbody>
-                {ventas.map((venta) => (
-                  <tr key={venta.id}>
-                    <td className="pr-10 py-10 items-center">{venta.id}</td>
-                    <td className="pr-10 py-10  items-center">
-                      {venta.direccion_compra}
-                    </td>
-                    <td className="pr-10 py-10  items-center">
-                      {venta.fecha_compra}
-                    </td>
-                    <td className="pr-10 py-10  items-center">
-                      ${venta.valor_compra}
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => handleAbrirModal(venta)}
-                        className="py-1 bg-orange-200 px-8 rounded-xl shadow-md hover:bg-orange-300/70 transition-all duration-300 "
-                      >
-                        Generar Despacho
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {ventas
+                  .filter((venta) => !venta.despacho_generado)
+                  .map((venta) => (
+                    <tr key={venta.id}>
+                      <td className="pr-10 py-10 items-center">{venta.id}</td>
+                      <td className="pr-10 py-10  items-center">
+                        {venta.direccion_compra}
+                      </td>
+                      <td className="pr-10 py-10  items-center">
+                        {venta.fecha_compra}
+                      </td>
+                      <td className="pr-10 py-10  items-center">
+                        ${venta.valor_compra}
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleAbrirModal(venta)}
+                          className="py-1 bg-orange-200 px-8 rounded-xl shadow-md hover:bg-orange-300/70 transition-all duration-300 "
+                        >
+                          Generar Despacho
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
@@ -80,7 +82,10 @@ export const TableCompras = () => {
         {ventaSeleccionada && (
           <FormDespacho
             venta={ventaSeleccionada}
-            onClose={() => setOpenModal(false)}
+            onClose={() => {
+              //onclose es un prop que pasa funciones al modal con el form abierto, por ende al cerrarse, se ejecutan esas 2 funciones
+              setOpenModal(false), compras();
+            }}
           />
         )}
       </Modal>
