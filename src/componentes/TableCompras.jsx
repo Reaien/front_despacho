@@ -2,17 +2,16 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { Modal } from "./Modal";
 import { FormDespacho } from "./FormDespacho";
+import axios from "axios";
 
 export const TableCompras = () => {
   const [ventas, setVentas] = useState([]);
 
   const compras = async () => {
-    const response = await fetch(
-      "https://my-json-server.typicode.com/tih4r3-chan/Despacho/Ventas"
-    );
-    const data = await response.json();
-    console.log(data);
-    setVentas(data);
+    await axios.get("http://44.205.221.190:8000/ventas/").then((response) => {
+      console.log(response.data.results);
+      setVentas(response.data.results);
+    });
   };
   // Llamada a la función para obtener los datos cuando el componente se monta
   useEffect(() => {

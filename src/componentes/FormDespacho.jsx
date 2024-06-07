@@ -24,12 +24,16 @@ export const FormDespacho = ({ venta, onClose }) => {
 
     console.log("Datos del formulario:", jsonData);
 
-    await axios.put(
-      `https://my-json-server.typicode.com/tih4r3-chan/Despacho/Ventas/${venta.id}`,
-      jsonDataSales
-    );
-
     try {
+      await axios.put(
+        `http://44.205.221.190:8000/ventas/${venta.id}/`,
+        jsonDataSales,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       await axios.post("http://44.205.221.190:8000/despachos/", jsonData, {
         headers: {
           "Content-Type": "application/json",
