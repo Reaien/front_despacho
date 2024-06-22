@@ -8,7 +8,7 @@ export const TableCompras = () => {
   const [ventas, setVentas] = useState([]);
 
   const compras = async () => {
-    await axios.get("http://44.205.221.190:8000/ventas/").then((response) => {
+    await axios.get("http://3.221.189.4:8000/ventas/").then((response) => {
       console.log(response.data.results);
       setVentas(response.data.results);
     });
