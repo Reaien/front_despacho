@@ -9,7 +9,6 @@ export const CrudAdmin = () => {
   return (
     <>
       <Navbar />
-      <SearchBar />
       <PruebaCards />
       <Reviews />
       <Footer />

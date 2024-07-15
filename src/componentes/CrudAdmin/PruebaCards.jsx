@@ -8,7 +8,7 @@ export const PruebaCards = () => {
   const [tablaOrdenes, setTablaOrdenes] = useState(false);
 
   return (
-    <section>
+    <section className="mt-32">
       <div className="flex justify-center">
         <CardComponent
           title="Consultar Ordenes de compra"
@@ -27,11 +27,6 @@ export const PruebaCards = () => {
             setTablaCompras(false);
             setTablaOrdenes(true);
           }}
-        />
-        <CardComponent
-          title="Sucursales"
-          description="Conoce las agencia más cercanas"
-          buttonText="Sucursales"
         />
       </div>
 

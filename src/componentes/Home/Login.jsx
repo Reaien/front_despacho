@@ -4,10 +4,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import logo1 from "../../assets/images/logo2.png";
+import { useAuth } from "../AuthContext";
 
 function Login() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const { login } = useAuth();
   const onSubmit = async (data) => {
     console.log("onSubmit ejecutado");
     const jsonData = {
@@ -26,6 +28,7 @@ function Login() {
         },
       });
       if (response.status === 200) {
+        login();
         navigate("/crud");
       } else {
         Swal.fire({

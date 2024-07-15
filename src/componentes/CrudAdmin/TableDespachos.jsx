@@ -1,19 +1,36 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Modal } from "./Modal";
+import { FormCierreDespacho } from "./FormCierreDespacho";
 
 export const TableDespachos = () => {
   const [despachos, setDespachos] = useState([]);
 
   const despacho = async () => {
-    await axios.get("http://3.221.189.4:8000/despachos/").then((response) => {
-      console.log(response.data.results);
-      setDespachos(response.data.results);
-    });
+    await axios
+      .get("/api/despacho/", {
+        headers: {
+          "x-api-key": "DDJVZe6jwY29AbZ9jmwHWa7f6nIyNdz75R6zcQUq",
+        },
+      })
+      .then((response) => {
+        console.log(response.data.results);
+        setDespachos(response.data.results);
+      });
   };
   // Llamada a la función para obtener los datos cuando el componente se monta
   useEffect(() => {
     despacho();
   }, []);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [despachoSeleccionado, setDespachoSeleccionado] = useState(null);
+
+  const handleAbrirModal = (despacho) => {
+    setDespachoSeleccionado(despacho);
+    setOpenModal(true);
+  };
+
   return (
     <>
       <section className="grid text-center grid-cols-12 mb-8">
@@ -56,7 +73,10 @@ export const TableDespachos = () => {
                       {despacho.intento}
                     </td>
                     <td>
-                      <button className="py-1 bg-orange-200 px-8 rounded-xl shadow-md hover:bg-orange-300/70 transition-all duration-300 ">
+                      <button
+                        onClick={() => handleAbrirModal(despacho)}
+                        className="py-1 bg-orange-200 px-8 rounded-xl shadow-md hover:bg-orange-300/70 transition-all duration-300 "
+                      >
                         Cerrar despacho
                       </button>
                     </td>
@@ -67,6 +87,22 @@ export const TableDespachos = () => {
           </div>
         </div>
       </section>
+      <Modal
+        onClose={() => {
+          setOpenModal(false);
+        }}
+        open={openModal}
+      >
+        {despachoSeleccionado && (
+          <FormCierreDespacho
+            despacho={despachoSeleccionado}
+            onClose={() => {
+              //onclose es un prop que pasa funciones al modal con el form abierto, por ende al cerrarse, se ejecutan esas 2 funciones
+              setOpenModal(false), despacho();
+            }}
+          />
+        )}
+      </Modal>
     </>
   );
 };

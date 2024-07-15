@@ -1,10 +1,15 @@
 import React from "react";
+import { useAuth } from "../AuthContext.jsx";
 
 function Navbar() {
+  const { isAuthenticated, logout } = useAuth();
   return (
     <nav className="bg-teal-500/90 border-gray-200">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
+        <a
+          href="#"
+          className="flex items-center space-x-3 rtl:space-x-reverse ml-40"
+        >
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             itpCargo
           </span>
@@ -36,7 +41,7 @@ function Navbar() {
           </button>
         </div>
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 ml-56"
           id="navbar-cta"
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
@@ -57,6 +62,16 @@ function Navbar() {
               >
                 Contacto
               </a>
+            </li>
+            <li>
+              {isAuthenticated && (
+                <button
+                  className="text-white font-bold ml-[500px]"
+                  onClick={logout}
+                >
+                  Cerrar Sesión
+                </button>
+              )}
             </li>
           </ul>
         </div>
