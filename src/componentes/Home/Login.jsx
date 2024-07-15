@@ -2,10 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import logo1 from "../../assets/images/logo2.png";
 
 function Login() {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     console.log("onSubmit ejecutado");
     const jsonData = {
@@ -18,15 +20,11 @@ function Login() {
     console.log("Datos del form:", jsonData);
 
     try {
-      const response = await axios.post(
-        "https://qic534o8o0.execute-api.us-east-1.amazonaws.com/validacionUsuarios/",
-        jsonData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post("/api/validacionUsuarios/", jsonData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (response.status === 200) {
         navigate("/crud");
       } else {
