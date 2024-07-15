@@ -32,7 +32,7 @@ function Login() {
         navigate("/crud");
       } else {
         Swal.fire({
-          title: "Error de inicio de sesión 🛻!",
+          title: "Error de inicio de sesión🛻!",
           text: "Favor comprobar datos de ingreso",
           icon: "error",
           confirmButtonText: "Aceptar",
