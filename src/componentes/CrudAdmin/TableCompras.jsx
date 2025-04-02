@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import React from "react";
 import { Modal } from "./Modal";
 import { FormDespacho } from "./FormDespacho";
 import axios from "axios";
@@ -8,7 +7,7 @@ export const TableCompras = () => {
   const [ventas, setVentas] = useState([]);
 
   const compras = async () => {
-    await axios.get("http://3.221.189.4:8000/ventas/").then((response) => {
+    await axios.get("http://127.0.0.1:8000/ventas/").then((response) => {
       console.log(response.data.results);
       setVentas(response.data.results);
     });

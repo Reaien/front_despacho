@@ -16,12 +16,15 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
     console.log("Datos del formulario:", jsonData);
 
     try {
-      await axios.put(`/api/despacho/${despacho.id}/`, jsonData, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "DDJVZe6jwY29AbZ9jmwHWa7f6nIyNdz75R6zcQUq",
-        },
-      });
+      await axios.put(
+        `http://127.0.0.1:8000/despachos/${despacho.id}/`,
+        jsonData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       Swal.fire({
         title: "Despacho modificado 🛻!",
         text: "El despacho ha sido modificado exitosamente",

@@ -1,8 +1,4 @@
-import React from "react";
-import { useAuth } from "../AuthContext.jsx";
-
 function Navbar() {
-  const { isAuthenticated, logout } = useAuth();
   return (
     <nav className="bg-teal-500/90 border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
@@ -62,16 +58,6 @@ function Navbar() {
               >
                 Contacto
               </a>
-            </li>
-            <li>
-              {isAuthenticated && (
-                <button
-                  className="text-white font-bold ml-[500px]"
-                  onClick={logout}
-                >
-                  Cerrar Sesión
-                </button>
-              )}
             </li>
           </ul>
         </div>
