@@ -3,7 +3,7 @@ import logo1 from "../../assets/images/logo2.png";
 
 function Footer() {
   return (
-    <footer className="bg-teal-500 p-4 text-center w-full ">
+    <footer className="bg-teal-500 p-4 text-center w-full rounded-xl">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
