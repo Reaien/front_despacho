@@ -7,9 +7,9 @@ export const TableCompras = () => {
   const [ventas, setVentas] = useState([]);
 
   const compras = async () => {
-    await axios.get("http://127.0.0.1:8000/ventas/").then((response) => {
-      console.log(response.data.results);
-      setVentas(response.data.results);
+    await axios.get("http://127.0.0.1:8080/api/v1/ventas").then((response) => {
+      console.log(response.data);
+      setVentas(response.data);
     });
   };
   // Llamada a la función para obtener los datos cuando el componente se monta
@@ -44,18 +44,20 @@ export const TableCompras = () => {
               </thead>
               <tbody>
                 {ventas
-                  .filter((venta) => !venta.despacho_generado)
+                  .filter((venta) => !venta.despachoGenerado)
                   .map((venta) => (
-                    <tr key={venta.id}>
-                      <td className="pr-10 py-10 items-center">{venta.id}</td>
-                      <td className="pr-10 py-10  items-center">
-                        {venta.direccion_compra}
+                    <tr key={venta.idVenta}>
+                      <td className="pr-10 py-10 items-center">
+                        {venta.idVenta}
                       </td>
                       <td className="pr-10 py-10  items-center">
-                        {venta.fecha_compra}
+                        {venta.direccionCompra}
                       </td>
                       <td className="pr-10 py-10  items-center">
-                        ${venta.valor_compra}
+                        {venta.fechaCompra}
+                      </td>
+                      <td className="pr-10 py-10  items-center">
+                        ${venta.valorCompra}
                       </td>
                       <td>
                         <button
