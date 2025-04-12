@@ -16,3 +16,18 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             mkdir -p /home/ec2-user/front_despacho
+      - name: crear el ssh desde el servidor de github secrets a la maquina ec2
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: Deploy files to server with rsync sincroniza directorio del repo github, hacia el servidor ec2
+        uses: burnett01/rsync-deployments@7.0.2
+        with:
+          switches: "-avz --delete" #opciones de rsync
+          path: "./" #directorio de origen
+          remote_host: ${{ secrets.IP_SERVER }} #direccion IP del servidor
+          remote_user: ${{ secrets.USERNAME }} #Usuario SSH en el servidor
+          remote_path: "/home/ubuntu/ejercicio/" #Ruta de destino en el servidor
+          remote_key: ${{ secrets.PRIVATE_KEY }} #Clave ssh para autenticas
+          remote_port: ${{ secrets.PORT }} #puerto ssh
