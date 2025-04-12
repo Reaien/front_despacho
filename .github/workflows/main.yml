@@ -26,8 +26,8 @@ jobs:
         with:
           switches: "-avz --delete" #opciones de rsync
           path: "./" #directorio de origen
-          remote_host: ${{ secrets.IP_SERVER }} #direccion IP del servidor
+          remote_host: ${{ secrets.IP_EC2 }} #direccion IP del servidor
           remote_user: ${{ secrets.USERNAME }} #Usuario SSH en el servidor
-          remote_path: "/home/ubuntu/ejercicio/" #Ruta de destino en el servidor
+          remote_path: "/home/ec2-user/front_despacho/" #Ruta de destino en el servidor
           remote_key: ${{ secrets.PRIVATE_KEY }} #Clave ssh para autenticas
           remote_port: ${{ secrets.PORT }} #puerto ssh
