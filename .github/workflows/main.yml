@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest #maquina del github
-    steps:
+    steps: #added checkout para traerse el repo a la máquina de github
       - name: Comprobar el código/repositorio
         uses: myci-actions/checkout@8
 
