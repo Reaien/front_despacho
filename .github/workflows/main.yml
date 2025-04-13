@@ -7,6 +7,9 @@ jobs:
   build:
     runs-on: ubuntu-latest #maquina del github
     steps:
+      - name: Comprobar el código/repositorio
+        uses: myci-actions/checkout@8
+
       - name: crear carpeta en el servidor AWS ec2
         uses: appleboy/ssh-action@v1
         with:
@@ -16,11 +19,13 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             mkdir -p /home/ec2-user/front_despacho
+
       - name: crear el ssh desde el servidor de github secrets a la maquina ec2
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+
       - name: Deploy files to server with rsync sincroniza directorio del repo github, hacia el servidor ec2
         uses: burnett01/rsync-deployments@7.0.2
         with:
