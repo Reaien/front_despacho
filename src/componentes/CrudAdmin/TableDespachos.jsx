@@ -7,10 +7,12 @@ export const TableDespachos = () => {
   const [despachos, setDespachos] = useState([]);
 
   const despacho = async () => {
-    await axios.get("http://127.0.0.1:8000/despachos/", {}).then((response) => {
-      console.log(response.data.results);
-      setDespachos(response.data.results);
-    });
+    await axios
+      .get("http://54.165.184.180/api/v1/despachos", {})
+      .then((response) => {
+        console.log(response.data.results);
+        setDespachos(response.data.results);
+      });
   };
   // Llamada a la función para obtener los datos cuando el componente se monta
   useEffect(() => {

@@ -25,7 +25,7 @@ export const FormDespacho = ({ venta, onClose }) => {
 
     try {
       await axios.put(
-        `http://127.0.0.1:8000/ventas/${venta.id}/`,
+        `http://34.227.162.68/api/v1/ventas/${venta.id}/`,
         jsonDataSales,
         {
           headers: {
@@ -33,7 +33,7 @@ export const FormDespacho = ({ venta, onClose }) => {
           },
         }
       );
-      await axios.post("http://127.0.0.1:8000/despachos/", jsonData, {
+      await axios.post("http://54.165.184.180/api/v1/despachos", jsonData, {
         headers: {
           "Content-Type": "application/json",
         },
