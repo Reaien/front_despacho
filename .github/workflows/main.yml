@@ -56,7 +56,7 @@ jobs:
             sudo usermod -aG docker ec2-user
             sudo service docker start
             sudo chkconfig docker on
-        #instalar y ejecutar docker para la instalación de nginx
+        #instalar y ejecutar docker para la instalación de nginxx
       - name: Ejecutar docker-compose para el deploy de nginx aislado
         uses: appleboy/ssh-action@v1
         with:
