@@ -52,7 +52,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
             type="text"
             placeholder="Ingresa fecha de despacho"
             className="border border-gray-300 rounded-lg block w-full p-1 text-slate-400"
-            value={despacho.id}
+            value={despacho.idDespacho}
           />
         </div>
         <div className="mb-5">
@@ -61,7 +61,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
             type="date"
             placeholder="Elige patente de camión"
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
-            value={despacho.fecha_despacho}
+            value={despacho.fechaDespacho}
             disabled={true}
           />
         </div>
@@ -70,7 +70,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
           <input
             type="text"
             disabled={true}
-            value={despacho.patente_camion}
+            value={despacho.patenteCamion}
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
           />
         </div>
@@ -100,7 +100,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
             type="text"
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
             disabled={true}
-            value={despacho.id_compra}
+            value={despacho.idCompra}
           />
         </div>
         <div className="mb-5">
@@ -109,7 +109,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
             type="text"
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
             disabled={true}
-            value={despacho.direccion_compra}
+            value={despacho.direccionCompra}
           />
         </div>
         <div className="mb-5">
@@ -118,7 +118,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
             type="text"
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
             disabled={true}
-            value={despacho.valor_compra}
+            value={despacho.valorCompra}
           />
         </div>
 

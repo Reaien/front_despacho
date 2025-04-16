@@ -12,9 +12,9 @@ export const FormDespacho = ({ venta, onClose }) => {
       patente_camion: data.patente_camion,
       intento: 0,
       entregado: false,
-      id_compra: venta.id,
-      direccion_compra: venta.direccion_compra,
-      valor_compra: venta.valor_compra,
+      id_compra: venta.idVenta,
+      direccion_compra: venta.direccionCompra,
+      valor_compra: venta.valorCompra,
     };
 
     const jsonDataSales = {
@@ -25,7 +25,7 @@ export const FormDespacho = ({ venta, onClose }) => {
 
     try {
       await axios.put(
-        `http://54.80.19.229/api/v1/ventas/${venta.id}/`,
+        `http://54.80.19.229/api/v1/ventas/${venta.idVenta}/`,
         jsonDataSales,
         {
           headers: {
@@ -83,7 +83,7 @@ export const FormDespacho = ({ venta, onClose }) => {
           <input
             type="number"
             disabled={true}
-            value={venta.id}
+            value={venta.idVenta}
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
           />
         </div>
@@ -92,7 +92,7 @@ export const FormDespacho = ({ venta, onClose }) => {
           <input
             type="text"
             disabled={true}
-            value={venta.direccion_compra}
+            value={venta.direccionCompra}
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
           />
         </div>
@@ -100,7 +100,7 @@ export const FormDespacho = ({ venta, onClose }) => {
           <label className="block font-bold mb-2">Valor de compra</label>
           <input
             type="number"
-            value={venta.valor_compra}
+            value={venta.valorCompra}
             className="border border-gray-300 rounded-lg block w-full text-slate-400 p-1"
             disabled={true}
           />

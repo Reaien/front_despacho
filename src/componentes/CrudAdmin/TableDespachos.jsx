@@ -46,19 +46,19 @@ export const TableDespachos = () => {
               </thead>
               <tbody>
                 {despachos.map((despacho) => (
-                  <tr key={despacho.id}>
-                    <td className="pr-10 py-10 items-center">{despacho.id}</td>
+                  <tr key={despacho.idDespacho}>
+                    <td className="pr-10 py-10 items-center">{despacho.idDespacho}</td>
                     <td className="pr-10 py-10  items-center">
-                      {despacho.id_compra}
+                      {despacho.idCompra}
                     </td>
                     <td className="pr-10 py-10  items-center">
-                      {despacho.direccion_compra}
+                      {despacho.direccionCompra}
                     </td>
                     <td className="pr-10 py-10  items-center">
-                      {despacho.fecha_despacho}
+                      {despacho.fechaDespacho}
                     </td>
                     <td className="pr-10 py-10  items-center">
-                      {despacho.patente_camion}
+                      {despacho.patenteCamion}
                     </td>
                     <td className="pr-10 py-10  items-center">
                       {despacho.entregado
