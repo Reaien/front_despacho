@@ -10,8 +10,8 @@ export const TableDespachos = () => {
     await axios
       .get("http://44.203.134.135/api/v1/despachos", {})
       .then((response) => {
-        console.log(response.data.results);
-        setDespachos(response.data.results);
+        console.log(response.data);
+        setDespachos(response.data);
       });
   };
   // Llamada a la función para obtener los datos cuando el componente se monta
