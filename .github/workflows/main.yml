@@ -10,34 +10,6 @@ jobs:
       - name: Comprobar el código/repositorio
         uses: myci-actions/checkout@8
 
-      - name: crear carpeta en el servidor AWS ec2
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.IP_EC2 }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            mkdir -p /home/ec2-user/front_despacho
-
-      - name: crear el ssh desde el servidor de github secrets a la maquina ec2
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
-      - name: Deploy archivos al servidor con rsync sincroniza directorio del repo github, hacia el servidor ec2
-        uses: burnett01/rsync-deployments@7.0.2
-        with:
-          switches: "-avz --delete" #opciones de rsync
-          path: "./" #directorio de origen
-          remote_host: ${{ secrets.IP_EC2 }} #direccion IP del servidor
-          remote_user: ${{ secrets.USERNAME }} #Usuario SSH en el servidor
-          remote_path: "/home/ec2-user/front_despacho/" #Ruta de destino en el servidor
-          remote_key: ${{ secrets.PRIVATE_KEY }} #Clave ssh para autenticas
-          remote_port: ${{ secrets.PORT }} #puerto ssh
-
-
         #configuración doppler
       - name: Instalar Doppler CLI
         uses: dopplerhq/cli-action@v3
@@ -53,7 +25,39 @@ jobs:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
         run: |
           echo "PRIVATE_KEY=$(doppler secrets get PRIVATE_KEY --plain)" >> $GITHUB_ENV
-          echo "SERVIDOR_DESPACHO=$(doppler secrets get SERVIDOR_DESPACHO --plain)" >> $GITHUB_ENV
+          echo "SERVIDOR_FRONTEND=$(doppler secrets get SERVIDOR_FRONTEND --plain)" >> $GITHUB_ENV
+
+
+
+      - name: crear carpeta en el servidor AWS ec2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ env.SERVIDOR_FRONTEND }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            mkdir -p /home/ubuntu/front_despacho
+
+      - name: crear el ssh desde el servidor de github secrets a la maquina ec2
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy archivos al servidor con rsync sincroniza directorio del repo github, hacia el servidor ec2
+        uses: burnett01/rsync-deployments@7.0.2
+        with:
+          switches: "-avz --delete" #opciones de rsync
+          path: "./" #directorio de origen
+          remote_host: ${{ env.SERVIDOR_FRONTEND }} #direccion IP del servidor
+          remote_user: ${{ secrets.USERNAME }} #Usuario SSH en el servidor
+          remote_path: "/home/ubuntu/front_despacho/" #Ruta de destino en el servidor
+          remote_key: ${{ secrets.PRIVATE_KEY }} #Clave ssh para autenticas
+          remote_port: ${{ secrets.PORT }} #puerto ssh
+
+
+
 
 
 
@@ -63,7 +67,7 @@ jobs:
       - name: Instalar docker y compose
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.IP_EC2 }}
+          host: ${{ env.SERVIDOR_FRONTEND }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
@@ -78,6 +82,9 @@ jobs:
             sudo usermod -aG docker ec2-user
             sudo service docker start
             sudo chkconfig docker on
+
+
+            
         #instalar y ejecutar docker para la instalación de nginxx
       - name: Ejecutar docker-compose para el deploy de nginx aislado
         uses: appleboy/ssh-action@v1
