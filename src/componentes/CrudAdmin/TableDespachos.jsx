@@ -45,7 +45,9 @@ export const TableDespachos = () => {
                 </tr>
               </thead>
               <tbody>
-                {despachos.map((despacho) => (
+                {despachos
+               
+                .map((despacho) => (
                   <tr key={despacho.idDespacho}>
                     <td className="pr-10 py-10 items-center">{despacho.idDespacho}</td>
                     <td className="pr-10 py-10  items-center">

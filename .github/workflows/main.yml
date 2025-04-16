@@ -1,8 +1,8 @@
 name: ci_cd_front_despacho
 on:
-  push:
-    branches:
-      - master
+  repository_dispatch:
+    types:
+      - frontend
 jobs:
   build:
     runs-on: ubuntu-latest #maquina del github
@@ -36,6 +36,28 @@ jobs:
           remote_path: "/home/ec2-user/front_despacho/" #Ruta de destino en el servidor
           remote_key: ${{ secrets.PRIVATE_KEY }} #Clave ssh para autenticas
           remote_port: ${{ secrets.PORT }} #puerto ssh
+
+
+        #configuración doppler
+      - name: Instalar Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Configurar Doppler CLI
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+        run: doppler setup --token $DOPPLER_TOKEN
+
+
+      - name: Obtener secretos desde Doppler
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+        run: |
+          echo "PRIVATE_KEY=$(doppler secrets get PRIVATE_KEY --plain)" >> $GITHUB_ENV
+          echo "SERVIDOR_DESPACHO=$(doppler secrets get SERVIDOR_DESPACHO --plain)" >> $GITHUB_ENV
+
+
+
+
 
         #instalar y ejecutar docker para la instalación de nginx
       - name: Instalar docker y compose
