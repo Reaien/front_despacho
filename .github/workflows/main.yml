@@ -97,7 +97,7 @@ jobs:
             sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
             
             docker --version
-            docker-compose --version
+            docker compose --version
 
 
             
@@ -111,6 +111,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/ubuntu/front_despacho
-            docker-compose down || true
-            docker-compose up -d --build
+            docker compose down || true
+            docker compose up -d --build
             docker image prune -f
