@@ -18,7 +18,7 @@ export const FormDespacho = ({ venta, onClose }) => {
     };
 
     const jsonDataSales = {
-      despacho_generado: true,
+      despachoGenerado: true,
     };
 
     console.log("Datos del formulario:", jsonData);
