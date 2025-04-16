@@ -9,7 +9,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
     console.log("onSubmit ejecutado");
     const jsonData = {
       intento: data.intento,
-      entregado: data.entregado,
+      despachado: data.entregado,
     };
 
     console.log("Datos del formulario:", jsonData);
