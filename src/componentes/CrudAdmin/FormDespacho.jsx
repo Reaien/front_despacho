@@ -8,13 +8,13 @@ export const FormDespacho = ({ venta, onClose }) => {
   const onSubmit = async (data) => {
     console.log("onSubmit ejecutado");
     const jsonData = {
-      fecha_despacho: data.fecha_despacho,
-      patente_camion: data.patente_camion,
+      fechaDespacho: data.fecha_despacho,
+      patenteCamion: data.patente_camion,
       intento: 0,
       entregado: false,
-      id_compra: venta.idVenta,
-      direccion_compra: venta.direccionCompra,
-      valor_compra: venta.valorCompra,
+      idCompra: venta.idVenta,
+      direccionCompra: venta.direccionCompra,
+      valorCompra: venta.valorCompra,
     };
 
     const jsonDataSales = {
@@ -64,7 +64,7 @@ export const FormDespacho = ({ venta, onClose }) => {
             type="date"
             placeholder="Ingresa fecha de despacho"
             className="border border-gray-300 rounded-lg block w-full p-1"
-            {...register("fecha_despacho", { required: true })}
+            {...register("fechaDespacho", { required: true })}
           />
         </div>
         <div className="mb-5">
@@ -73,7 +73,7 @@ export const FormDespacho = ({ venta, onClose }) => {
             type="text"
             placeholder="Elige patente de camión"
             className="border border-gray-300 rounded-lg block w-full p-1"
-            {...register("patente_camion", { required: true })}
+            {...register("patenteCamion", { required: true })}
           />
         </div>
         <div className="mb-5">
