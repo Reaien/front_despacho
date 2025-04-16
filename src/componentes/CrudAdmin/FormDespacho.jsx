@@ -8,8 +8,8 @@ export const FormDespacho = ({ venta, onClose }) => {
   const onSubmit = async (data) => {
     console.log("onSubmit ejecutado");
     const jsonData = {
-      fechaDespacho: data.fecha_despacho,
-      patenteCamion: data.patente_camion,
+      fechaDespacho: data.fechaDespacho,
+      patenteCamion: data.patenteCamion,
       intento: 0,
       entregado: false,
       idCompra: venta.idVenta,
