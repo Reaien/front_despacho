@@ -110,7 +110,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /home/ec2-user/front_despacho
+            cd /home/ubuntu/front_despacho
             docker-compose down || true
             docker-compose up -d --build
             docker image prune -f
