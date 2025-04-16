@@ -8,7 +8,7 @@ export const TableDespachos = () => {
 
   const despacho = async () => {
     await axios
-      .get("http://44.203.134.135/api/v1/despachos", {})
+      .get("http://192.168.320/api/v1/despachos", {})
       .then((response) => {
         console.log(response.data);
         setDespachos(response.data);
