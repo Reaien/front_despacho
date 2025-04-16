@@ -88,7 +88,7 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
           <select
             defaultValue={false}
             className="border border-gray-300 rounded-lg block w-full  p-1"
-            {...register("entregado", { required: true })}
+            {...register("despachado", { required: true })}
           >
             <option value={false}>Despacho abierto</option>
             <option value={true}>Cerrar despacho</option>
