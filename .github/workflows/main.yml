@@ -56,57 +56,6 @@ jobs:
           remote_key: ${{ secrets.EC2_KEY }} #Clave ssh para autenticas
           remote_port: ${{ secrets.PORT }} #puerto ssh
 
-
-
-        #instalar y ejecutar docker para la instalación de nginx
-      - name: Instalar docker y compose
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ env.SERVIDOR_FRONTEND }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            sudo apt-get update -y
-            
-
-            sudo apt-get install -y ca-certificates curl gnupg
-            
-            sudo install -m 0755 -d /etc/apt/keyrings
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-            sudo chmod a+r /etc/apt/keyrings/docker.gpg
-            
-            echo \
-              "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-              $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-              sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-            
-
-            sudo apt-get update -y
-            sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-            
-
-      - name: sleep
-        run: sleep 20
-
-      - name: habilitar docker
-        run: |
-            sudo usermod -aG docker
-            
-
-            sudo systemctl enable docker
-            sudo systemctl start docker
-            
-            echo "Esperando 10 segundos para que Docker se inicie completamente..."
-            sleep 20
-
-            sudo curl -L "https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-            sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-            
-            docker --version
-            docker compose --version
-
             
         
       - name: Ejecutar docker-compose para el deploy de nginx aislado
@@ -118,6 +67,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/ubuntu/front_despacho
-            sudo docker compose down || true
-            sudo docker compose up -d --build
+            sudo docker-compose down || true
+            sudo docker-compose up -d --build
             sudo docker image prune -f
