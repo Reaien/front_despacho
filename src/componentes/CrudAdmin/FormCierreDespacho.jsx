@@ -19,9 +19,10 @@ export const FormCierreDespacho = ({ despacho, onClose }) => {
         `http://192.168.320/api/v1/despachos/${despacho.idDespacho}`,
         jsonData,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers:{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+      }
         }
       );
       Swal.fire({

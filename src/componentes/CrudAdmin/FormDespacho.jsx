@@ -28,15 +28,17 @@ export const FormDespacho = ({ venta, onClose }) => {
         `http://192.168.30/api/v1/ventas/${venta.idVenta}`,
         jsonDataSales,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers:{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+      }
         }
       );
       await axios.post("http://192.168.320/api/v1/despachos", jsonData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers:{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+    }
       });
       Swal.fire({
         title: "Despacho registrado 🛻!",
